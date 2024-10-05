@@ -1,4 +1,5 @@
 import CabinCard from "../_components/CabinCard";
+import { getCabins } from "../_lib/data-service";
 
 
 export const metadata = {
@@ -6,9 +7,10 @@ export const metadata = {
 }
 
 
-function Page() {
+ async function Page() {
    // CHANGE
-   const cabins = [];
+   const cabins = await getCabins();
+   console.log(cabins)
 
    return (
      <div>
