@@ -4,13 +4,13 @@
 
 @layer components {
   .spinner {
-    margin: 3.2rem auto 1.6rem; /* Center the spinner */
-    width: 60px; /* Width of the spinner */
-    aspect-ratio: 1; /* Keeps it circular */
-    border-radius: 50%; /* Rounded edges */
-    border: 8px solid theme('colors.primary.900'); /* Main color */
-    border-right-color: theme('colors.primary.200'); /* Right color for the effect */
-    animation: rotate 1s infinite linear; /* Rotation animation */
+    margin: 3.2rem auto 1.6rem; 
+    width: 60px; 
+    aspect-ratio: 1; 
+    border-radius: 50%; 
+    border: 8px solid theme('colors.primary.900'); 
+    border-right-color: theme('colors.primary.200'); 
+    animation: rotate 1s infinite linear;
   }
 
   .spinner-mini {

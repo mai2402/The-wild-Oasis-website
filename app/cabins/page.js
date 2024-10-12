@@ -4,6 +4,7 @@ import Spinner from "@/app/_components/Spinner";
 
 
 
+
 export const metadata = {
     title:"Cabins"
 }
@@ -28,11 +29,13 @@ export const metadata = {
        </p>
        {/* eslint-enable react/no-unescaped-entities */}
  
+      
       <Suspense  fallback={<Spinner />} >
       {console.log("Spinner is rendered")}
         <CabinList/>
       </Suspense>
      </div>
+   
    );
 }
 
