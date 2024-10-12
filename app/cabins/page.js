@@ -13,6 +13,8 @@ export const metadata = {
 
    return (
      <div>
+     { /* eslint-disable react/no-unescaped-entities */}
+
        <h1 className="text-4xl mb-5 text-accent-400 font-medium">
          Our Luxury Cabins
        </h1>
@@ -24,7 +26,7 @@ export const metadata = {
          away from home. The perfect spot for a peaceful, calm vacation. Welcome
          to paradise.
        </p>
-       
+       {/* eslint-enable react/no-unescaped-entities */}
  
       <Suspense  fallback={<Spinner />} >
       {console.log("Spinner is rendered")}
