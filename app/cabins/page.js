@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import CabinList from "./CabinList";
 import Spinner from "@/app/_components/Spinner";
+import Filter from "../_components/Filter";
 
 
 
@@ -10,7 +11,10 @@ export const metadata = {
 }
 
 
-  function Page() {
+  function Page({searchParams}) {
+    
+
+    const filter = searchParams?.capacity ?? "all"
 
    return (
      <div>
@@ -28,11 +32,11 @@ export const metadata = {
          to paradise.
        </p>
        {/* eslint-enable react/no-unescaped-entities */}
- 
-      
-      <Suspense  fallback={<Spinner />} >
-      {console.log("Spinner is rendered")}
-        <CabinList/>
+   <div className="flex justify-end mb-8">
+       <Filter/>
+   </div>
+      <Suspense  fallback={<Spinner />} key={filter} >
+        <CabinList filter= {filter}/>
       </Suspense>
      </div>
    
