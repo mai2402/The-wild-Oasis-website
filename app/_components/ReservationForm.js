@@ -1,6 +1,9 @@
+"use client"
 
+import { useReservation } from "./ReservationContext";
 
 function ReservationForm({cabin}) {
+const {range} = useReservation()
   // CHANGE
   const maxCapacity = cabin.maxCapacity
 
@@ -20,7 +23,11 @@ function ReservationForm({cabin}) {
           <p>{user.name}</p>
         </div> */}
       </div>
-
+               {/* Convert Date to readable string format */}
+      <p>
+        From: {range.from ? range.from.toLocaleDateString() : "_"} 
+        {" "}to: {range.to ? range.to.toLocaleDateString() : "_"}
+      </p>
       <form className='bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col'>
         <div className='space-y-2'>
           <label htmlFor='numGuests'>How many guests?</label>
