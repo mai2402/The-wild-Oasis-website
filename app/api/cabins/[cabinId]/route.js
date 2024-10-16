@@ -8,7 +8,6 @@ export async function GET(request, {params}){
 
     try{
          const [cabin, bookedDates] =await Promise.all([getCabin(cabinId),getBookedDatesByCabinId(cabinId)])
-         console.log(cabin,bookedDates)
          return Response.json({cabin,bookedDates})
     }
     catch{
