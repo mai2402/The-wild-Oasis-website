@@ -4,6 +4,7 @@ import { getCabin, getCabins} from "@/app/_lib/data-service";
 import Cabin from"@/app/_components/Cabin"
 import { Suspense } from "react";
 import Spinner from "@/app/_components/Spinner";
+import LoginMessage from "@/app/_components/LoginMessage";
 
 
   export  async function generateMetadata({params}){
@@ -26,6 +27,7 @@ import Spinner from "@/app/_components/Spinner";
   
   export default async function Page({params}) {
     const cabin = await getCabin(params.cabinId)
+   
     
     return (
       <div className="max-w-6xl mx-auto mt-8">
@@ -36,7 +38,7 @@ import Spinner from "@/app/_components/Spinner";
             Reserve {cabin.name} today. Pay on arrival.
           </h2>
           <Suspense fallback={<Spinner/>}>
-          <Reservation cabin={cabin}/>
+           <Reservation cabin={cabin}/>
           </Suspense>
 
         </div>
