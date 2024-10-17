@@ -9,7 +9,7 @@ export const metadata = {
 
  async function Page() {
   const session = await auth();
-
+ 
   const firstName = session.user.name.split(" ").at(0)
     return (
         <div>
