@@ -15,11 +15,11 @@ import LoginMessage from "@/app/_components/LoginMessage";
   export async function  generateStaticParams(){
 
     const cabins = await getCabins()
-
-    const ids = cabins.map((cabin) => ({
+const ids = cabins.map((cabin) => ({
       cabinId :String(cabin.id)
      
-    })) ;
+    }))
+     ;
    
     return ids;
   }
