@@ -62,6 +62,7 @@ export default UpdateProfileForm
 
 
 function Button (){
+  // this hook needs to be placed inside of a component tha is rendered by a form
   const {pending}= useFormStatus()
 
   return(
