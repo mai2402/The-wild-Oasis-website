@@ -64,6 +64,12 @@ export async function deleteReservation(bookingId){
   if(!guestBookingsId.includes(bookingId)) 
     throw new Error("you are not allowed to delete this booking!!")
 
+  // for testing useOptimistic hook
+  
+  // await new Promise((res) => setTimeout(res, 1000));
+
+  // throw new Error();
+
   const {  error } = 
   await supabase.from('bookings').delete().eq('id', bookingId);
 
