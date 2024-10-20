@@ -1,11 +1,33 @@
 "use client"
+import { differenceInDays } from "date-fns";
 import { useReservation } from "./ReservationContext";
+import { CreateReservation } from "../_lib/actions";
+import {useFormStatus} from "react-dom"
+import SpinnerMini from "./SpinnerMini";
 
  function ReservationForm({cabin,user}) {
-const {range} = useReservation()
 
+   const {range,resetRange } = useReservation()
+   const {regularPrice,discount,maxCapacity,id}=cabin;
+
+
+   const startDate = range.from;
+   const endDate = range.to;
+ 
+   const numNights = differenceInDays(endDate,startDate);
+   const cabinPrice = Number(numNights * (regularPrice-discount));
+
+
+
+   const reservationData = {
+    startDate,
+    endDate,
+    numNights,
+    cabinPrice,
+    cabinId :id
+   }
   // CHANGE
-  const maxCapacity = cabin.maxCapacity
+   const createReservationWithData = CreateReservation.bind(null,reservationData)
 
   return (
     <div className='scale-[1.01]'>
@@ -28,12 +50,17 @@ const {range} = useReservation()
         From: {range.from ? range.from.toLocaleDateString() : "_"} 
         {" "}to: {range.to ? range.to.toLocaleDateString() : "_"}
       </p>
-      <form className='bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col'>
+      <form action={async (formData)=>{ await createReservationWithData(formData)
+                                               resetRange()
+      }}
+            //action={createReservationWithData} 
+            className='bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col'>
+        
         <div className='space-y-2'>
-          <label htmlFor='numGuests'>How many guests?</label>
+          <label htmlFor='numOfGuests'>How many guests?</label>
           <select
-            name='numGuests'
-            id='numGuests'
+            name='numOfGuests'
+            id='numOfGuests'
             className='px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm'
             required
           >
@@ -59,17 +86,36 @@ const {range} = useReservation()
             placeholder='Any pets, allergies, special requirements, etc.?'
           />
         </div>
-
         <div className='flex justify-end items-center gap-6'>
-          <p className='text-primary-300 text-base'>Start by selecting dates</p>
+          {!(startDate && endDate) ? (
+    <p className='text-primary-300 text-base'>Start by selecting dates</p>
+  ) : (
+    <Button />
+  )}
+</div>
 
-          <button className='bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300'>
-            Reserve now
-          </button>
-        </div>
       </form>
     </div>
   );
 }
 
+
 export default ReservationForm;
+
+
+function Button (){
+  const {pending} = useFormStatus()
+
+  return (
+    <>
+      {pending ? (
+        <SpinnerMini />
+      ) : (
+        <button className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
+          Reserve now
+        </button>
+      )}
+    </>
+  );
+}
+  

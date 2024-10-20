@@ -8,6 +8,7 @@ async function Reservation({cabin}) {
     const session =  await auth()
 
     const [bookedDates,settings]= await Promise.all([getBookedDatesByCabinId(cabin.id),getSettings()])
+    console.log(bookedDates)
     return (
         <div className="grid grid-cols-2" >
         <DateSelector  bookedDates={bookedDates} settings={settings} cabin={cabin}/>

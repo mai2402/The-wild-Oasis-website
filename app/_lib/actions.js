@@ -7,6 +7,40 @@ import { getBookings } from "./data-service";
 import { redirect } from "next/navigation";
 
 
+export async function CreateReservation(bookingData,formData){
+ 
+  const session = await auth();
+  if (!session )
+   throw new Error("You must be logged in!!")
+
+  const guestId = session.guestId;
+  const numOfGuests = Number(formData.get("numOfGuests"));
+  const observations = formData.get("observations").slice(0,1000)
+  const totalPrice = bookingData.cabinPrice
+  const reservationFullData = {...bookingData, guestId,numOfGuests,observations, extrasPrice:0,totalPrice, isPaid:false,hasBreakfast:false, status: "unconfirmed"}
+
+
+  const { error } = await supabase
+    .from('bookings')
+    .insert([reservationFullData])
+  
+  if (error) {
+    console.error(error);
+    throw new Error('reservation could not be created');
+  }
+
+  revalidatePath(`/cabins/${bookingData.cabinId}`)
+
+  redirect("/cabins/thankyou")
+}
+
+
+
+
+
+
+
+
 export async function updateReservation(formData){
 
   const bookingId = Number(formData.get("bookingId"))
