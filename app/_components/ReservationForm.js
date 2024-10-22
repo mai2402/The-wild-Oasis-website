@@ -74,6 +74,19 @@ import SpinnerMini from "./SpinnerMini";
             ))}
           </select>
         </div>
+        <div className='space-y-2'>
+  <label htmlFor="hasBreakfast"> Add Breakfast </label>
+  <div className="flex items-center gap-3">
+    <input
+      type="checkbox"
+      name="hasBreakfast"
+      id="hasBreakfast"
+      className="h-6 w-6 text-primary-800 bg-primary-200 border-2 border-primary-800 rounded shadow-sm focus:ring-primary-500"
+      required
+    />
+    <label htmlFor="hasBreakfast" className="text-primary-800">Yes, please</label>
+  </div>
+</div>
 
         <div className='space-y-2'>
           <label htmlFor='observations'>

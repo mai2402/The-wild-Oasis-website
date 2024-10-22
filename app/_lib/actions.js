@@ -16,8 +16,9 @@ export async function CreateReservation(bookingData,formData){
   const guestId = session.guestId;
   const numOfGuests = Number(formData.get("numOfGuests"));
   const observations = formData.get("observations").slice(0,1000)
+  const hasBreakfast = formData.get("hasBreakfast")
   const totalPrice = bookingData.cabinPrice
-  const reservationFullData = {...bookingData, guestId,numOfGuests,observations, extrasPrice:0,totalPrice, isPaid:false,hasBreakfast:false, status: "unconfirmed"}
+  const reservationFullData = {...bookingData, guestId,numOfGuests,observations, extrasPrice:0,totalPrice, isPaid:false,hasBreakfast, status: "unconfirmed"}
 
 
   const { error } = await supabase
